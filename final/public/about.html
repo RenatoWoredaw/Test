@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Comfy</title>
+    <!-- font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+
+    <!-- styles css -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <nav class="navbar page">
+      <div class="nav-center">
+        <!-- links -->
+        <div>
+          <button class="toggle-nav">
+            <i class="fas fa-bars"></i>
+          </button>
+          <ul class="nav-links">
+            <li>
+              <div class="profile-area"></div>
+            </li>
+            <li>
+              <a href="index.html" class="nav-link">
+                home
+              </a>
+            </li>
+            <li>
+              <a href="products.html" class="nav-link">
+                products
+              </a>
+            </li>
+            <li>
+              <a href="about.html" class="nav-link">
+                about
+              </a>
+            </li>
+            <li>
+              <a href="auth.html" class="nav-link" id="sign-in">
+                sign in
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- logo -->
+        <img src="./images/logo-black.svg" class="nav-logo" alt="logo" />
+        <!-- cart icon -->
+        <div class="toggle-container">
+          <button class="toggle-cart">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+          <span class="cart-item-count">1</span>
+        </div>
+      </div>
+    </nav>
+    <!-- hero -->
+    <section class="page-hero">
+      <div class="section-center">
+        <h3 class="page-hero-title">Home / About</h3>
+      </div>
+    </section>
+    <!-- sidebar -->
+    <div class="sidebar-overlay">
+      <aside class="sidebar">
+        <!-- close -->
+        <button class="sidebar-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <!-- links -->
+        <ul class="sidebar-links">
+          <li>
+            <a href="index.html" class="sidebar-link">
+              <i class="fas fa-home fa-fw"></i>
+              home
+            </a>
+          </li>
+          <li>
+            <a href="products.html" class="sidebar-link">
+              <i class="fas fa-couch fa-fw"></i>
+              products
+            </a>
+          </li>
+          <li>
+            <a href="about.html" class="sidebar-link">
+              <i class="fas fa-book fa-fw"></i>
+              about
+            </a>
+          </li>
+          <li>
+            <a href="auth.html" id="login-page" class="sidebar-link">
+                <i class="fas fa-user fa-fw"></i>
+                sign-in   
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+    <!-- cart -->
+    <div class="cart-overlay">
+      <aside class="cart">
+        <button class="cart-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <header>
+          <h3 class="text-slanted">your bag</h3>
+        </header>
+        <!-- cart items -->
+        <div class="cart-items"></div>
+        <!-- footer -->
+        <footer>
+          <h3 class="cart-total text-slanted">
+            total : $12.99
+          </h3>
+          <button class="cart-checkout btn">checkout</button>
+        </footer>
+      </aside>
+    </div>
+    <!-- about -->
+    <section class="section section-center about-page">
+      <div class="title">
+        <h2><span>/</span> our history</h2>
+      </div>
+      <p class="about-text">
+      We are a modern furniture discovery platform designed to make your shopping experience easier, faster, and more convenient. Instead of visiting multiple websites, stores, and pages to compare products, we bring everything together in one place.
+      Our platform lists furniture products from multiple trusted companies, allowing you to browse and compare a wide variety of items — from sofas and beds to office chairs, dining sets, and home decor.
+<br>
+✔ Make furniture shopping simple: 
+We collect products from different suppliers and present them in one clean, user-friendly interface.
+<br>
+✔ Help you explore high-quality options: 
+From luxury brands to affordable daily-use furniture, we give you access to a wide range of products that fit your style and budget.
+<br>
+✔ Save your time: 
+No more switching between websites. We give you detailed product information, prices, and images — all in one place.
+<br>
+✔ Support furniture companies: 
+We help businesses reach more customers by showcasing their products to thousands of potential buyers.
+<br>
+Our Vision: 
+To become the leading furniture discovery platform by connecting customers with the best products from trusted furniture companies across the country and beyond.
+    </p>
+    </section>
+    <script type="module" src="./src/pages/about.js"></script>
+    <script type="module" src="./src/pages/authUI.js"></script>
+
+  </body>
+</html>

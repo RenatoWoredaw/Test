@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Verification</title>
+  <style>
+    body { font-family: Arial; display:flex; align-items:center; justify-content:center; height:100vh; background:#f7f7f7; }
+    .box { background:#fff; padding:2rem; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); width:300px; }
+    input, button { width:100%; padding:10px; margin-top:10px; border-radius:5px; border:1px solid #ccc; }
+    button { background:#007bff; color:white; border:none; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Verify Email</h2>
+    <p>Enter the 6-digit code sent to your email.</p>
+    <input id="code" placeholder="Verification Code" />
+    <button onclick="verify()">Verify</button>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    // Extract email from URL query string
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email'); // this is the user's email from signup
+
+    async function verify() {
+      const code = document.getElementById('code').value;
+
+      if (!code) {
+        document.getElementById('msg').textContent = 'Please enter the verification code';
+        return;
+      }
+
+      const res = await fetch('/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, code })
+      });
+
+      const data = await res.json();
+      document.getElementById('msg').textContent = data.message;
+
+      //redirect to login after successful verification
+      if (res.ok) {
+        setTimeout(() => {
+          window.location.href = 'auth.html';
+        }, 1500);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+// global imports
+import '../toggleSidebar.js';
+import '../cart/toggleCart.js';
+import '../cart/setupCart.js';
+
+console.log("✅ about.js loaded successfully");
