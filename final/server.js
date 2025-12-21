@@ -20,10 +20,12 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:5000";
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public')); // serves your frontend files
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+// process.env.MONGO_URI
+mongoose.connect("mongodb://127.0.0.1:27017/furniture", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -52,7 +54,7 @@ app.post('/signup', async (req, res) => {
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: 'Email already registered' });
-
+    
     const newUser = new User({ name, email, password, verificationCode: code });
 
     // Send email with code
