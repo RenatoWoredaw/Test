@@ -74,7 +74,7 @@ app.post('/signup', async (req, res) => {
       subject: "Email Verification",
       html: `<p>Your verification code is <b>${code}</b></p>`
     });
-
+    
     console.log("RESEND RESULT:", result);
     console.log(`Verification code sent to ${email}`);
 
