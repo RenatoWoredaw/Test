@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const nodemailer = require("nodemailer");
-const sgMail = require('@sendgrid/mail');
 //import jwt from "jsonwebtoken";
 const jwt = require("jsonwebtoken");
 const fetch = require("node-fetch");
 const User = require('./Models/User');
 require('dotenv').config();
+const { Resend } = require("resend");
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const router = express.Router();
 const CHAPA_INIT_URL = "https://api.chapa.co/v1/transaction/initialize";
@@ -68,6 +68,12 @@ app.post('/signup', async (req, res) => {
     //   subject: "Verify Your Email",
     //   text: `Your verification code is ${code}`,
     // });
+    await resend.emails.send({
+      from: "Furniture App <onboarding@resend.dev>",
+      to: email,
+      subject: "Email Verification",
+      html: `<p>Your verification code is <b>${code}</b></p>`
+    });
 
     console.log(`Verification code sent to ${email}`);
 
