@@ -4,7 +4,8 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const nodemailer = require("nodemailer");
 //import jwt from "jsonwebtoken";
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const fetch = require("node-fetch");
 const User = require('./Models/User');
 require('dotenv').config();
 
@@ -157,7 +158,9 @@ function genTxRef() {
 // 1) Create a transaction and return checkout_url
 app.post("/api/create-chapa-transaction", verifyToken, async (req, res) => {
   try {
-    const { amount, currency = "ETB", email } = req.body;
+    const { amount, currency = "ETB", gmail } = req.body;
+
+    console.log("EMAIL SENT TO CHAPA:", gmail, typeof gmail);
 
     const first_name = "Customer"; // Default name
     const last_name = "User";     // Optional
@@ -174,7 +177,7 @@ app.post("/api/create-chapa-transaction", verifyToken, async (req, res) => {
       tx_ref,
       first_name: first_name || user.username || "Customer",
       last_name: last_name || "",
-      email: email,
+      email: gmail,
       callback_url: `${BASE_URL}/api/chapa/callback`, // chapa will call/redirect here
       // optional: return_url (where user lands after payment)
       return_url: `${BASE_URL}/payment-success?tx_ref=${tx_ref}`

@@ -52,16 +52,17 @@ document.querySelector('.cart-checkout').addEventListener('click', async () => {
     // Example: compute total on client or ask server to compute securely
     const total = (Total()/100).toFixed(2);
     console.log(total);
-
-    const user = JSON.parse(localStorage.getItem("user"));  
+    
+    const user = JSON.parse(localStorage.getItem("user")); 
+    console.log(user.email);
     // Call server to create chapa transaction
-    const res = await fetch('http://localhost:5000/api/create-chapa-transaction', {
+    const res = await fetch('/api/create-chapa-transaction', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({ amount: total, currency: 'ETB', email: user.email })
+      body: JSON.stringify({ amount: total, currency: 'ETB', gmail: user.email })
     });
 
     const data = await res.json();
