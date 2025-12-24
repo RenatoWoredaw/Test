@@ -68,13 +68,14 @@ app.post('/signup', async (req, res) => {
     //   subject: "Verify Your Email",
     //   text: `Your verification code is ${code}`,
     // });
-    await resend.emails.send({
-      from: "<onboarding@resend.dev>",
+    const result = await resend.emails.send({
+      from: "Furniture App <onboarding@resend.dev>",
       to: email,
       subject: "Email Verification",
       html: `<p>Your verification code is <b>${code}</b></p>`
     });
 
+    console.log("RESEND RESULT:", result);
     console.log(`Verification code sent to ${email}`);
 
     await newUser.save();
