@@ -69,7 +69,7 @@ app.post('/signup', async (req, res) => {
     //   text: `Your verification code is ${code}`,
     // });
     await resend.emails.send({
-      from: "Furniture App <onboarding@resend.dev>",
+      from: "<onboarding@resend.dev>",
       to: email,
       subject: "Email Verification",
       html: `<p>Your verification code is <b>${code}</b></p>`
