@@ -19,7 +19,7 @@ const router = express.Router();
 const CHAPA_INIT_URL = "https://api.chapa.co/v1/transaction/initialize";
 const CHAPA_VERIFY_URL = "https://api.chapa.co/v1/transaction/verify"; // append /<tx_ref>
 const CHAPA_SECRET = process.env.CHAPA_SECRET_KEY;
-const BASE_URL = process.env.BASE_URL || "http://localhost:5000";
+const BASE_URL = process.env.BASE_URL || "https://test-8meh.onrender.com";
 
 // Middleware
 app.use(cors());
