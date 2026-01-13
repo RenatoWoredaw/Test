@@ -47,11 +47,14 @@ signupForm.addEventListener('submit', async (e) => {
   const name = document.getElementById('signup-name').value;
   const email = document.getElementById('signup-email').value;
   const password = document.getElementById('signup-password').value;
+  const subcity = document.getElementById('subcity').value;
+  const district = document.getElementById('district').value;
+
 
   const res = await fetch('/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, password })
+    body: JSON.stringify({ name, email, password, subcity, district })
   });
 
   const data = await res.json();

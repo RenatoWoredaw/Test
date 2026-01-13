@@ -12,7 +12,29 @@ const userSchema = new mongoose.Schema({
       productId: { type: String, required: true },
       quantity: { type: Number, default: 1 },
     },
-  ]
+  ],
+  address: {
+    country: {
+      type: String,
+      enum: ["Ethiopia"],
+      required: true
+    },
+    city: {
+      type: String,
+      enum: ["Addis Ababa"],
+      required: true
+    },
+    subcity: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    district: {
+      type: String,
+      required: true,
+      trim: true
+    }
+  }
 });
 
 // Automatically hash password before saving

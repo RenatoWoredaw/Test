@@ -52,14 +52,20 @@ const transporter = nodemailer.createTransport({
 // ------------------------
 app.post('/signup', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, subcity, district } = req.body;
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: 'Email already registered' });
     
-    const newUser = new User({ name, email, password, verificationCode: code });
+    const newUser = new User({ name, email, password, verificationCode: code, 
+      address: {
+        country: "Ethiopia",
+        city: "Addis Ababa",
+        subcity,
+        district
+  } });
 
     // Send email with code
     // await transporter.sendMail({
@@ -266,6 +272,21 @@ app.post('/chapa/callback', async (req, res) => {
         await user.save();
       }
 
+      await Order.create({
+        userId,
+        items: user.cart,
+        totalAmount,
+        paymentRef: tx_ref,
+        paymentMethod: "Chapa",
+        status: "Paid"
+      });
+
+      user.cart = [];
+      await user.save();
+
+      return res.redirect(
+        `/payment-success.html?tx_ref=${tx_ref}`
+      );
       // Respond to Chapa with success (HTTP 200)
       return res.status(200).send('Payment verified and processed');
     } else {
@@ -276,6 +297,16 @@ app.post('/chapa/callback', async (req, res) => {
     console.error('Callback verify error', err);
     return res.status(500).send('Server error');
   }
+});
+
+app.get("/api/order/:tx_ref", async (req, res) => {
+  const order = await Order.findOne({
+    paymentRef: req.params.tx_ref
+  });
+
+  if (!order) return res.status(404).json({ error: "Not found" });
+
+  res.json(order);
 });
 
 
